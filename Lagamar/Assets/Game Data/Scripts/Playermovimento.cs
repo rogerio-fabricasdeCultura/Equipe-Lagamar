@@ -26,11 +26,4 @@ public class Playermovimento : MonoBehaviour
     {
         horizontal = context.ReadValue<Vector2>().x;
     }
-
-    public void 
-
-    private bool IsGrounded()
-    {
-        return Physics2D.OverlapCapsule(groundCheck.position, new vector2(1f, 0.1f), CapsuleDirection2D.Horizontal, 0, groundLayer);
-    }
 }
