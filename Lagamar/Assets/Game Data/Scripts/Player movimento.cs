@@ -11,7 +11,7 @@ public class Playermovimento : MonoBehaviour
     [Header("Player Settings")]
     [SerializeField] float speed;
     
-    [Header(Grounding)]
+    [Header("Grounding")]
     [SerializeField] LayerMask groundLayer;
     [SerializeField] Transform groundCheck; 
 
@@ -27,7 +27,7 @@ public class Playermovimento : MonoBehaviour
         horizontal = context.ReadValue<Vector2>().x;
     }
 
-    public void
+    public void 
 
     private bool IsGrounded()
     {
