@@ -11,9 +11,9 @@ public class Playermovimento : MonoBehaviour
     [Header("Player Settings")]
     [SerializeField] float speed;
     
-    [Header(Grounding)]
+    [Header("Grounding")]
     [SerializeField] LayerMask groundLayer;
-    [SerializeField] Transform groundCheck;
+    [SerializeField] Transform groundCheck; 
 
     private float horizontal;
 
