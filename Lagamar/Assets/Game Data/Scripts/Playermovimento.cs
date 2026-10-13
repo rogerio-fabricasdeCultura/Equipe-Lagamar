@@ -1,29 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Playermovimento : MonoBehaviour
 {
     [Header("Player Component References")]
-    [SerializeField] Rigidbody2D rb;
-    
-    [Header("Player Settings")]
-    [SerializeField] float speed;
-    
-    [Header("Grounding")]
-    [SerializeField] LayerMask groundLayer;
-    [SerializeField] Transform groundCheck; 
+    [SerializeField] private Rigidbody2D rb;
 
-    private float horizontal;
+    [Header("Player Settings")]
+    [SerializeField] private float speed = 5f;
+
+    private Vector2 movementInput;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+        rb.velocity = Vector2.ClampMagnitude(movementInput, 1f) * speed;
     }
 
-    public void Move(InputAction.CallbackContext context)
+    public void OnMove(InputValue value)
     {
-        horizontal = context.ReadValue<Vector2>().x;
+        movementInput = value.Get<Vector2>();
     }
 }
