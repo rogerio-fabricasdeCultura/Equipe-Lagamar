@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMove_rogerio : MonoBehaviour
+
 {
+
+    bool IsWalking = false;
+
     [Header("Player Component References")]
     [SerializeField] private Rigidbody2D rb;
 
@@ -26,5 +30,19 @@ public class PlayerMove_rogerio : MonoBehaviour
     public void OnMove(InputValue value)
     {
         movementInput = value.Get<Vector2>();
+        SetIsWalking(false);
+    }
+
+    private void SetIsWalking(bool value) {
+        if (value != IsWalking) {
+            if (value){
+                Debug.Log("Walking");
+            }
+            else {
+                    Debug.Log("Player_Idle")
+                }
+
+        }
+        IsWalking = value
     }
 }
