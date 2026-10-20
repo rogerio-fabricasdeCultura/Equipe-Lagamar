@@ -36,11 +36,22 @@ public class PlayerMove_rogerio : MonoBehaviour
         {
             //Debug.Log("Input de movimento");
             myAnim.SetBool("Move", true);
+
+            // Verifique se o movimento é para cima ou para baixo
+            if (movementInput.y > 0)
+            {
+                myAnim.SetBool("Up", true);
+            }
+            else
+            {
+                myAnim.SetBool("Up", false);
+            }
         }
         else
         {
             myAnim.SetBool("Move", false);
-        }
+        }        
+
     }
 
     private void SetIsWalking( ) {
