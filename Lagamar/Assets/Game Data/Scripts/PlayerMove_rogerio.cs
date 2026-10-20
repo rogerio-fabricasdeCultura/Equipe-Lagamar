@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,7 +11,7 @@ public class PlayerMove_rogerio : MonoBehaviour
     [SerializeField] private float speed = 5f;
 
     [Header("Animation")]
-    [SerializeField] Animator myAnim;
+    [SerializeField] private Animator myAnim;
 
     private Vector2 movementInput;
 
@@ -30,31 +29,35 @@ public class PlayerMove_rogerio : MonoBehaviour
     public void OnMove(InputValue value)
     {
         movementInput = value.Get<Vector2>();
-        
-        // Verificar se existe input
+
+        SetIsWalking();
+    }
+
+    private void SetIsWalking()
+    {
         if (movementInput != Vector2.zero)
         {
-            //Debug.Log("Input de movimento");
             myAnim.SetBool("Move", true);
 
-            // Verifique se o movimento é para cima ou para baixo
-            if (movementInput.y > 0)
+            // Prioriza esquerda e direita
+            if (movementInput.x != 0)
             {
-                myAnim.SetBool("Up", true);
+                myAnim.SetFloat("Horizontal",
+                    Mathf.Sign(movementInput.x));
+
+                myAnim.SetBool("Up", false);
             }
             else
             {
-                myAnim.SetBool("Up", false);
+                myAnim.SetFloat("Horizontal", 0);
+
+                myAnim.SetBool("Up",
+                    movementInput.y > 0);
             }
         }
         else
         {
             myAnim.SetBool("Move", false);
-        }        
-
-    }
-
-    private void SetIsWalking( ) {
-       
+        }
     }
 }
