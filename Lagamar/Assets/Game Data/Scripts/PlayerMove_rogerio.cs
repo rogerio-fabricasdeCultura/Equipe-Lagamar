@@ -4,22 +4,22 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMove_rogerio : MonoBehaviour
-
 {
-
-    bool IsWalking = false;
-
     [Header("Player Component References")]
     [SerializeField] private Rigidbody2D rb;
 
     [Header("Player Settings")]
     [SerializeField] private float speed = 5f;
 
+    [Header("Animation")]
+    [SerializeField] Animator myAnim;
+
     private Vector2 movementInput;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        myAnim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -30,19 +30,20 @@ public class PlayerMove_rogerio : MonoBehaviour
     public void OnMove(InputValue value)
     {
         movementInput = value.Get<Vector2>();
-        SetIsWalking(false);
+        
+        // Verificar se existe input
+        if (movementInput != Vector2.zero)
+        {
+            //Debug.Log("Input de movimento");
+            myAnim.SetBool("Move", true);
+        }
+        else
+        {
+            myAnim.SetBool("Move", false);
+        }
     }
 
-    private void SetIsWalking(bool value) {
-        if (value != IsWalking) {
-            if (value){
-                Debug.Log("Walking");
-            }
-            else {
-                    Debug.Log("Player_Idle")
-                }
-
-        }
-        IsWalking = value
+    private void SetIsWalking( ) {
+       
     }
 }
